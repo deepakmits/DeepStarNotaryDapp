@@ -19,4 +19,23 @@ contract('StarNotary' , accounts => {
             assert.equal(await contractInstance.starOwner(), owner)
         })
     })
+
+
+    describe('star can change owners', ()=>{
+        beforeEach(async ()=>{
+            assert.equal(await contractInstance.starOwner(),0)
+            await contractInstance.claimStar({from : owner})
+        })
+
+        it('can be claimed by second user', async () => {
+            var secondUser = accounts[1]
+            await contractInstance.claimStar({from: secondUser})
+
+            assert.equal(await contractInstance.starOwner(), secondUser)
+        })
+
+
+    })
+
+    
 })
