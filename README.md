@@ -33,3 +33,30 @@ http-server
 ```
 By default index.html is run at http://127.0.0.1:8080
 Use above to launch your star notary to display star, owner and button to claim star.
+
+## Unit testing with Truffle - Javascript - Solidity
+1) install truffle globally - 
+```
+npm install -global truffle
+```
+2) change directory to your project folder 
+```
+mkdir smart_contracts
+cd smart_contracts
+truffle init
+```
+3) Above creates 3 new directories in smart_contracts folder <br>
+   a) contracts
+   b) test
+   c) migrations and 2 files "truffle-config.js" and "truffle.js" <br>
+4) Move StarNotary.sol contract created using Remix to "contracts" folder
+5) Create StarNotaryTest.js file with unit tests in "tests" directory.
+6) Command to run unit tests (from smart_contracts directory)
+```
+truffle test
+```
+ 
+
+
+
+
