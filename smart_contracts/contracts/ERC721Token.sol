@@ -8,9 +8,14 @@ contract ERC721Token is ERC721 {
     mapping(uint256 => address) tokenToOwner; 
     //mapping of owner to balance (what is the balance this owner/address has in his wallets)
     mapping(address => uint256) ownerToBalance; 
+    //mapping of tokenid to approved address (which address is approved to transfer this 
+    //token on you behalf)
     mapping(uint256 => address) tokenToApproved;
+    //mapping of owner to operator to true (whether operator/exchange address is approved 
+    //to transfer your assets on your behalf)
     mapping(address => mapping(address => bool)) ownerToOperator;
 
+    //check if seller/caller function has proper permission/is the current owner of tokenid
     modifier hasPermission(address _caller, uint256 _tokenId) { 
         require(_caller == tokenToOwner[_tokenId] 
         || getApproved(_tokenId) == _caller 
@@ -91,6 +96,7 @@ contract ERC721Token is ERC721 {
         emit Transfer(_from, _to, _tokenId);
     }
 
+    //Use case - approving other address on your/caller behalf to transfer/sell token
     /// @notice Change or reaffirm the approved address for an NFT
     /// @dev The zero address indicates there is no approved address.
     ///  Throws unless `msg.sender` is the current NFT owner, or an authorized
@@ -105,6 +111,8 @@ contract ERC721Token is ERC721 {
         emit Approval(msg.sender, _approved, _tokenId);
     }
 
+    //User case - approving operator / exchange to transact on your assets on your behalf
+    //Setting approval for all of your assets
     /// @notice Enable or disable approval for a third party ("operator") to manage
     ///  all of `msg.sender`'s assets
     /// @dev Emits the ApprovalForAll event. The contract MUST allow
