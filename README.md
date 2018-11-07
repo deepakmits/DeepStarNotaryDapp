@@ -61,7 +61,12 @@ truffle test
  ERC721Token is ERC721 interface implementation as per our requirement of Star Notary.<br>
  Unit tests of the above ERC721Token are covered in ERC721TokenTest.js . <br>
  Below is the test report of above unit tests run using truffle.<br>
-![RC721Token Unit test report](images/ERC721TokenUT.png "ERC721Token Unit test report")
+![ERC721Token Unit test report](images/ERC721TokenUT.png "ERC721Token Unit test report")
+
+## Star Notary contract code coverage
+Below is the code coverage report of unit tests run using truffle.<br>
+![Star Notary code coverage](images/ERC721TokenUT1.png "Star Notary code coverage report")
+
  
  
 
