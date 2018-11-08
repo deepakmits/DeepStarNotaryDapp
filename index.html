@@ -11,99 +11,34 @@
 </head>
 
 <body>
-        <h1>Star Notary DApp</h1>
-        
-                <div class="container">
-                    <form role="form">
-                        <div class="form-group">
-                            Star Name :<br> 
-                                <input type="text"  id="star-name" placeholder="Name" required>
-                        </div>
-                        <div class="form-group">
-                            Cent:<br>
-                            <input type="text"  id="star-cent" placeholder="Ra" required>
-                        </div>
-                        <div class="form-group">
-                            Dec:<br>
-                            <input type="text" id="star-dec"  placeholder="Dec" required>
-                        </div>
-
-                        <div class="form-group">
-                            Mag:<br>
-                            <input type="text"  id="star-mag" placeholder="Mag" required>
-                        </div>
-                        <div class="form-group">
-                                Star ID:<br>
-                                <input type="text"  id="star-id" placeholder="Star ID" >
-                        </div>
-                        <div class="form-group">
-                                Story:<br>
-                                <input type="text" id="star-story" placeholder="Story" >
-                        </div>
-                        
-                        <button type="button" id="claim-button"  onclick="claimButtonClicked()">Claim Star</button>
-                    </form>
-                    <form role="info">
-                            Star Info by Star ID: <input type="text", id="starid" min=0><br>
-                            <button id="query-button" onclick="queryButtonClicked()">Get Star Info</button>
-
-                            <textarea id="starinfo" rows = "6" cols="100"></textarea>
-                    </form>
-                </div>
-        
+    <h1>Star Notary DApp</h1>
+    <form>
+        Star Name:<br>
+        <input type="text" id="star-name" name="Name" placeholder="Name" required><br>
+        Cent:<br>
+        <input type="text" id="star-cent" placeholder="Ra" required><br>
+        Dec:<br>
+        <input type="text" id="star-dec" placeholder="Dec" required><br>
+        Mag:<br>
+        <input type="text" id="star-mag" placeholder="Mag" required><br>
+        Star ID:<br>
+        <input type="text" id="star-id" placeholder="StarId" required><br>
+        Story:<br>
+        <input type="text" id="star-story" placeholder="Story"><br>
 
 
+        <label class="bold">Star Owner:</label><br>
+        <label id="star-owner"></label><br>
+        <button type="button" id="claim-button" onclick="claimButtonClicked()">Claim Star</button>
+    </form>
 
-    <!-- <div class="container">
-        <h1>Star Notary DApp</h1>
+    <form>
+        Star Info by Star ID: <input type="text" , id="starid" min=0><br>
+        <button id="query-button" onclick="queryButtonClicked()">Get Star Info</button>
 
+        <textarea id="starinfo" rows="6" cols="100"></textarea>
+    </form>
 
-
-        
-
-        <div class="row">
-            <label class="bold">Star Name:</label>
-            <label id="star-name"></label>
-            <input type="text" class="form-control" id="star-name" placeholder="Name" required>
-        </div>
-
-        <div class="row">
-            <label class="bold">Cent:</label>
-            <label id="star-cent"></label>
-            <input type="text" class="form-control" id="star-cent" placeholder="Ra" required>
-        </div>
-
-        <div class="row">
-            <label class="bold">Dec:</label>
-            <label id="star-dec"></label>
-            <input type="text" class="form-control" id="star-dec" placeholder="Dec" required>
-        </div>
-
-        <div class="row">
-            <label class="bold">Mag:</label>
-            <label id="star-mag"></label>
-            <input type="text" class="form-control" id="star-mag" placeholder="Mag" required>
-        </div>
-
-        <div class="row">
-            <label class="bold">Star Story:</label>
-            <label id="star-story"></label>
-            <input type="text" class="form-control" id="star-story" placeholder="Story" required>
-        </div>
-
-        <div class="row">
-            <label class="bold">Star Id:</label>
-            <label id="star-id"></label>
-            <input type="text" class="form-control" id="star-id" placeholder="Star Id" required>
-        </div>
-
-        <div class="row">
-            <label class="bold">Star Owner:</label>
-            <label id="star-owner"></label>
-        </div>
-
-        <button id="claim-button" onclick="claimButtonClicked()">Claim Star</button>
-    </div> -->
 
     <script>
 
@@ -378,7 +313,7 @@
         var starNotary = StarNotary.at('0x73fed16bc1f0fa19d0c7cf31ba737f94bc43e269');
         //var starNotary = StarNotary.at('0x5f04ed2f49cac93a8e7b9d36970a558b8adf005d');
 
-        
+
         // Enable claim button being clicked
         function claimButtonClicked() {
             web3.eth.getAccounts(function (error, accounts) {
@@ -393,15 +328,15 @@
                 var starMag = document.getElementById('star-mag').value;
                 var starId = document.getElementById('star-id').value;
                 var starStory = document.getElementById('star-story').value;
-                console.log("t"+starName + starCent + starDec);
+                console.log("t" + starName + starCent + starDec);
                 var account = accounts[0]
                 starNotary.createStar(starName, starCent, starDec, starMag, starStory, starId, function (error, result) {
-                    console.log("TxHash:"+result);
+                    console.log("TxHash:" + result);
                     if (!error) {
                         var starClaimedEvent = starNotary.starAdded({ from: account });
                         starClaimedEvent.watch(function (error, result) {
                             if (!error) {
-                                console.log("TxHash:"+result);
+                                console.log("TxHash:" + result);
                                 document.getElementById('star-owner').value = account;
                                 //location.reload();
                             } else {
@@ -418,24 +353,24 @@
 
 
 
-        function queryButtonClicked(){
-                web3.eth.getAccounts(function(error, accounts){
-                    if(error){
+        function queryButtonClicked() {
+            web3.eth.getAccounts(function (error, accounts) {
+                if (error) {
+                    console.log(error);
+                    return;
+                }
+                var account = accounts[0];
+                var starID = document.getElementById("starid").value;
+                starNotary.tokenIdToStarInfo(starID, function (error, result) {
+                    if (!error) {
+                        console.log(result);
+                        document.getElementById("starinfo").value = "[" + result + "]";
+                    } else {
                         console.log(error);
-                        return;
                     }
-                    var account = accounts[0];
-                    var starID = document.getElementById("starid").value;
-                    starNotary.tokenIdToStarInfo(starID, function(error, result){
-                        if(!error){
-                            console.log(result);
-                            document.getElementById("starinfo").value = "[" + result + "]";
-                        }else{
-                            console.log(error);
-                        }
-                    })
                 })
-            }
+            })
+        }
     </script>
 </body>
 
