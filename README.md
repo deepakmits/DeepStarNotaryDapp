@@ -131,7 +131,6 @@ Token Id - 1
 
 ### Execute PutStarUpForSale (Using myehterwllet)
 Transaction Hash - 0x5b8ef5b5bfc55870aaf7647113cc2c6e091f58f949edbcd9c726a4e3aa74b306 <br>
-Token Id - 1
 ![Put Star Up for Sale](images/PutStarUpForSale.png "Put Star up for Sale")
 
 
