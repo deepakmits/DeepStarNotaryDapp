@@ -135,10 +135,10 @@ Transaction Hash - 0x5b8ef5b5bfc55870aaf7647113cc2c6e091f58f949edbcd9c726a4e3aa7
 
 
 
+## Interaction with smart contract
 
- 
- 
+Web interface to interact with deployed smart contract deployed on rinkeby network.
 
-
-
+1) Start http-server
+2) Run - http://127.0.0.1:8080
 
