@@ -6,9 +6,9 @@ contract StarNotary is ERC721Token {
 
     struct Star { 
         string name;
+        string cent;
         string dec;
         string mag;
-        string cent;
         string story;    
     }
 

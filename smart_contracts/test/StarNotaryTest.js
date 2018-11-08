@@ -36,6 +36,25 @@ contract('StarNotary', accounts => {
     })
 
 
+    describe('matching star info', () => {
+        let tokenId1 = 1
+        let user1 = accounts[1]
+        beforeEach(async function () {
+            await this.contract.createStar('Deep star1', 'ra_032.155', 'dec_121.874', 'mag_245.978', 'My Deep Star Story 1', tokenId1, {from: user1})
+        })
+        
+        it('star info matches', async function () {
+            let star1 = await this.contract.tokenIdToStarInfo(tokenId1);
+
+            assert.equal(star1[0],'Deep star1') ;
+            assert.equal(star1[1],'My Deep Star Story 1') ;
+            assert.equal(star1[2],'ra_032.155') ;
+            assert.equal(star1[3],'dec_121.874') ;
+            assert.equal(star1[4],'mag_245.978') ;
+        }) 
+    })
+
+
     describe('buying and selling stars', () => { 
 
         let user1 = accounts[1]
