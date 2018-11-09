@@ -48,8 +48,8 @@
         } else {
             // Instantiate and set Ganache as your provider
             //running it thru ui
-            web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:7545"));
-            //web3 = new Web3(new Web3.providers.HttpProvider("https://rinkeby.infura.io/v3/360d3b276f5d4b78969708a8dde0d710"));
+            //web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:7545"));
+            web3 = new Web3(new Web3.providers.HttpProvider("https://rinkeby.infura.io/v3/360d3b276f5d4b78969708a8dde0d710"));
         }
         // The default (top) wallet account from a list of test accounts 
         web3.eth.defaultAccount = web3.eth.accounts[0];
@@ -484,8 +484,8 @@
             ]
         );
         // Grab the contract at specified deployed address with the interface defined by the ABI
-        var starNotary = StarNotary.at('0x73fed16bc1f0fa19d0c7cf31ba737f94bc43e269');
-        //var starNotary = StarNotary.at('0x5f04ed2f49cac93a8e7b9d36970a558b8adf005d');
+        //var starNotary = StarNotary.at('0x73fed16bc1f0fa19d0c7cf31ba737f94bc43e269');
+        var starNotary = StarNotary.at('0x5f04ed2f49cac93a8e7b9d36970a558b8adf005d');
 
 
         // Enable claim button being clicked
